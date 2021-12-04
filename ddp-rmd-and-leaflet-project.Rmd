@@ -1,12 +1,12 @@
 ---
-title: "ddp-rmd-and-leaflet-project"
+title: "Developing Data Products - Rmd and Leaflet Project"
 author: "David Erhart"
-date: "12/4/2021"
+date: "`r Sys.Date()`"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 library(leaflet)
 ```
 
@@ -16,18 +16,29 @@ zoox_sites <- c(
 )
 
 zoox_lat.long <- data.frame(
-        lat = c(37.56842, 37.57161, 37.76906, 37.50444,
+        lat = c(37.56842, 37.57160, 37.76906, 37.50444,
                 37.73873, 37.41785, 37.47456),
-        lng = c(-122.27305, -122.2609, -122.41159, -122.25429,
+        lng = c(-122.27305, -122.26610, -122.41159, -122.25429,
                 -121.562308, -122.26026, -121.92679)
+)
+
+zoox_icon <- makeIcon(
+        iconUrl = 'https://raw.githubusercontent.com/erhard1/ddp-rmd-leaflet-project/main/zoox_rnd_logo.jpg',
+        iconWidth = 20*400/400,
+        iconHeight = 20,
+        iconAnchorX = 20*400/400/2,
+        iconAnchorY = 10
 )
 ```
 
-
+# Here's a map of all the Zoox sites in the Bay Area
+[Zoox Web Site](https://zoox.com/)
 ```{r}
 zoox_lat.long %>% 
         leaflet() %>% 
         addTiles() %>% 
-        addMarkers(popup = zoox_sites)
+        addMarkers(icon = zoox_icon,
+                popup = zoox_sites,
+                clusterOptions = markerClusterOptions())
 ```
-
+Note: I work at the Chess site

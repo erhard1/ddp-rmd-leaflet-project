@@ -1,0 +1,33 @@
+---
+title: "ddp-rmd-and-leaflet-project"
+author: "David Erhart"
+date: "12/4/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(leaflet)
+```
+
+```{r}
+zoox_sites <- c(
+        'Chess', 'Bayside', 'Bryant', 'Commercial', 'Altamont', 'SLAC (Firehouse)', 'Kato'
+)
+
+zoox_lat.long <- data.frame(
+        lat = c(37.56842, 37.57161, 37.76906, 37.50444,
+                37.73873, 37.41785, 37.47456),
+        lng = c(-122.27305, -122.2609, -122.41159, -122.25429,
+                -121.562308, -122.26026, -121.92679)
+)
+```
+
+
+```{r}
+zoox_lat.long %>% 
+        leaflet() %>% 
+        addTiles() %>% 
+        addMarkers(popup = zoox_sites)
+```
+
